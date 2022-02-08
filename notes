@@ -1,0 +1,11 @@
+NPM - node package manager, we get it when we install node
+
+package file contains:
+    meta-data
+    dependencies (version)
+    build steps - scripts in 
+
+app.js - file where we start a server
+Gitignore - don't push node_modules
+You can import using import, or require
+app.listen(portNo) should be at the bottom
