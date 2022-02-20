@@ -6,5 +6,5 @@ console.log("Age: ", age); //do like that. Type coercion, javascript in 1st exam
 // to the string. In the 2nd example, type of 2 variables remains same
 
 console.log(2 == "2"); //type coerance happens here
-console.log(2 === "2"); // we dont coerce types. Always use 3 equal signs
+console.log(2 === "2"); // we dont coerce types. We should always use 3 equal signs
 console.log(2 !== "2"); 

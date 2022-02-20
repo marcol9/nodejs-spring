@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-const movies = [
+let movies = [
   { id: 1, name: "Shutter island" },
   { id: 2, name: "Back to the future" },
   { id: 3, name: "Spider-man" },
@@ -37,13 +37,18 @@ function deleteMovieByMovieId(movies, id) {
 }
 
 app.get("/", (req, res) => {
-  res.send(movies);
+  //res.send(movies); should be corrected, because it sends it like an array
+  res.send({ data: movies });
 });
+
 app.get("/:movieId", (req, res) => {
-  const movieId = req.params.movieId;
-  const movie = findMovieByMovieId(movies, movieId);
-  res.send(movie);
+  //const movieId = req.params.movieId;
+  //const movie = findMovieByMovieId(movies, movieId);
+  //res.send(movie);
+  const foundMovie = movies.find((movie) => movie.id === Number(req.params.movieId));
+  foundMovie ? res.send({ data: foundMovie }) /* exists case */ : res.status(404).send({}); /*undefined case*/
 });
+
 app.post("/", (req, res) => {
   // If we create new movie, the program creates movie with max id that exists + 1
 
@@ -54,16 +59,27 @@ app.post("/", (req, res) => {
   res.send(newMovie);
   movies.push(newMovie);
 });
+
 app.put("/:movieId", (req, res) => {
   const movieId = req.params.movieId;
   const movie = findMovieByMovieId(movies, movieId);
   movie.name = req.body.name;
   res.send(movie);
 });
+
 app.delete("/:movieId", (req, res) => {
-  const movieId = req.params.movieId;
-  deleteMovieByMovieId(movies, movieId);
-  res.send({ message: "successfully deleted movie with id: " + movieId });
+  //const movieId = req.params.movieId;
+  //deleteMovieByMovieId(movies, movieId);
+  //res.send({ message: "successfully deleted movie with id: " + movieId });
+  const foundMovieIndex = movies.findIndex((movie) => movie.id === Number(req.params.movieId));
+  if (foundMovieIndex != -1) {
+    movies.splice(foundMovieIndex, 1);
+    res.send({});
+  } else {
+    res.status(404).send({});
+  }
 });
 
-app.listen(8080);
+app.listen(8080, () => {
+  console.log("Server is running on port", 8080);
+});
