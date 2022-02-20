@@ -1,0 +1,50 @@
+html {
+  min-height: 100%;
+  background-image: url("./catfish.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+body {
+  text-align: center;
+  font-family: "Franklin Gothic Medium";
+  background-color: transparent;
+}
+
+h1 {
+  background-color: transparent;
+  color: aliceblue;
+  font-weight: 20;
+  font-size: 40px;
+  margin: 40px 0px 20px;
+}
+
+#clockdiv {
+  font-family: sans-serif;
+  background-color: transparent;
+  color: #fff;
+  display: inline-block;
+  font-weight: 100;
+  text-align: center;
+  font-size: 30px;
+}
+
+#clockdiv > div {
+  padding: 10px;
+  border-radius: 3px;
+  background: #05a166;
+  display: inline-block;
+}
+
+#clockdiv div > span {
+  padding: 15px;
+  border-radius: 3px;
+  background: #17492a;
+  display: inline-block;
+}
+
+.smalltext {
+  padding-top: 5px;
+  font-size: 16px;
+}
