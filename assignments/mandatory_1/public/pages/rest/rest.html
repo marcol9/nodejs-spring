@@ -1,0 +1,133 @@
+<div class="bd-content ps-lg-4">
+  <div class="content">
+    <h2 class="bd-title">What is REST?</h2>
+    <p class="bd-lead">
+      REST, or REpresentational State Transfer, is an architectural style for providing standards between computer systems on the web, making it
+      easier for systems to communicate with each other. REST-compliant systems, often called RESTful systems, are characterized by how they are
+      stateless and separate the concerns of client and server.
+      <br />
+      In the REST architectural style, the implementation of the client and the implementation of the server can be done independently without each
+      knowing about the other. This means that the code on the client side can be changed at any time without affecting the operation of the server,
+      and the code on the server side can be changed without affecting the operation of the client.
+    </p>
+    <figcaption class="blockquote-footer">
+      <cite title="Source Title">Codeacademy</cite>
+    </figcaption>
+  </div>
+  <div class="content">
+    <h2 class="bd-title">Example of REST API</h2>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+        <td>HTTP Method</td>
+        <td>Endpoint</td>
+        <td>What it does</td>
+      </thead>
+      <tr>
+        <td>GET</td>
+        <td>/movies</td>
+        <td>Get all the movies</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td>/movies/ID</td>
+        <td>Get a movie by ID</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td>/movies</td>
+        <td>Creates a new movie</td>
+      </tr>
+      <tr>
+        <td>PUT</td>
+        <td>/movies/ID</td>
+        <td>Update the whole ressource of a movie by ID</td>
+      </tr>
+      <tr>
+        <td>PATCH</td>
+        <td>/movies/ID</td>
+        <td>Update part of the ressource of a movie by ID</td>
+      </tr>
+      <tr>
+        <td>DELETE</td>
+        <td>/movies/ID</td>
+        <td>Deletes a movie by ID</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="content">
+    <h2 class="bd-title">How to do REST API in express?</h2>
+    <div class="bd-lead">
+      Below is the example of REST API in express. As you can see, when searching for the movies or movie IDs we don't use loops, because: they are
+      not functional, they are error prone (index out of bounds), and they are overly verbose. Instead, we should use methods like map,filter,find,
+      findIndex and others. Also, you can notice that when parsing the path variable, we convert it to number, that is because path variable is a
+      string by default, and we need to convert it to number in order to use strict equality operator (===). Also, I have line
+      <code>app.use(express.json());</code>, to recognize the incoming Request Object as a JSON Object.
+      <pre class="syntax">
+                const express = require("express");
+                const app = express();
+                app.use(express.json()); //we say that our api will recieve json objects
+                
+                let movies = [
+                  { id: 1, name: "Shutter island" },
+                  { id: 2, name: "Back to the future" },
+                  { id: 3, name: "Spider-man" },
+                  { id: 4, name: "Matrix" },
+                ];
+                CURRENT_ID = 4;
+                
+                
+                app.get("/", (req, res) => {
+                  res.send({ data: movies });
+                });
+                
+                app.get("/:movieId", (req, res) => {
+                  const foundMovie = movies.find((movie) => movie.id === Number(req.params.movieId));
+                  foundMovie ? res.send({ data: foundMovie }) : res.status(404).send({}); 
+                });
+                
+                app.post("/", (req, res) => {
+                  const movieToCreate = req.body;
+                  movieToCreate.id = ++CURRENT_ID;
+                  movies.push(movieToCreate);
+                  res.send({ data: movieToCreate });
+                });
+                
+                app.put("/:movieId", (req, res) => {
+                  const foundMovie = movies.find((movie) => movie.id === Number(req.params.movieId));
+                  foundMovie.name = req.body.name;
+                  res.send(foundMovie);
+                });
+                
+                app.patch("/:movieId", (req, res) => {
+                  const foundMovieIndex = movies.findIndex((movie) => movie.id === Number(req.params.movieId));
+                  if (foundMovieIndex != -1) {
+                    const foundMovie = movies[foundMovieIndex];
+                    const movieToUpdateWith = { ...foundMovie, ...req.body, id: foundMovie.id };
+                    movies[foundMovieId] = movieToUpdateWith;
+                    res.send({ data: movieToUpdateWith });
+                  } else {
+                    res.status(404).send({});
+                  }
+                });
+                
+                app.delete("/:movieId", (req, res) => {
+                  const foundMovieIndex = movies.findIndex((movie) => movie.id === Number(req.params.movieId));
+                  if (foundMovieIndex != -1) {
+                    movies.splice(foundMovieIndex, 1);
+                    res.send({});
+                  } else {
+                    res.status(404).send({});
+                  }
+                });
+                
+                app.listen(8080, () => {
+                  console.log("Server is running on port", 8080);
+                });
+               
+            </pre
+      >
+    </div>
+  </div>
+</div>

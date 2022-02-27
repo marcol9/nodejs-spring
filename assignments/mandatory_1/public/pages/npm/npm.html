@@ -1,0 +1,79 @@
+<div class="bd-content ps-lg-4">
+  <div class="content">
+    <h2 class="bd-title">Node package manager</h2>
+    <p class="bd-lead">
+      Node package manager or npm is a free package manager and installer for Node.js. With npm, you can donwnload and manage dependencies of your
+      project. Also, it is world's largest software library, which contains over 800 000 packages. There is a special website called
+      <a href="https://www.npmjs.com/">npmjs.com</a> where you can search for the packages that you need for your project. But since everyone can
+      publish their own packages, make sure to check that the package is safe to use. The easiest way to check it is to look at the weekly downloads
+      count - the more downloads the better.
+    </p>
+  </div>
+  <div class="content">
+    <h2 class="bd-title">How to initialize npm package?</h2>
+
+    <p class="bd-lead">
+      If you have a project, and you want to quickly set up your npm package, you can use <code>npm init</code> in your command prompt. But before
+      that make sure that you are in the project folder. Use <code>cd </code> command to easily navigate in the command prompt. When initializing
+      through npm init, you can provide various information about the project, like: package name, version, description, entry point, test command,
+      git repository, keywords, author and license. Then, npm will create package.json and other files needed for dependency managment.
+    </p>
+  </div>
+
+  <div class="content">
+    <h2 class="bd-title">What is package.json?</h2>
+    <div class="bd-lead">
+      A package.json file:
+      <ul>
+        <li>lists the packages your project depends on</li>
+        <li>specifies versions of a package that your project can use using semantic versioning rules</li>
+        <li>makes your build reproducible, and therefore easier to share with other developers</li>
+      </ul>
+    </div>
+  </div>
+  <div class="content">
+    <h2 class="bd-title">Dependencies that we used and how to install them</h2>
+    <div class="bd-lead">
+      In our classes we have used <b>nodemon</b> and <b>express</b>, but since I had some problems with nodemon that I could not fix, I have used
+      <b>supervisor</b> instead. <br />
+      <br />
+      What are these packages for?
+      <ul>
+        <li>
+          <b>nodemon</b> helps develop node.js based applications by automatically restarting the node application when file changes in the directory
+          are detected.
+        </li>
+        <li>
+          <b>express</b> is a back end web application framework for Node.js, which is designed for building web applications and APIs. You can find
+          more about express <a href="/express">here</a>
+        </li>
+        <li><b>supervisor</b> is a nodemon alternative, it restarts programs when a file changes.</li>
+      </ul>
+      To install the package, type <code>npm i package-name</code>, and don't forget to be in your project's directory. To uninstall the package, type
+      <code>npm un package-name</code>. Also, you can use flag <code>-g</code> to install package globally. <br />
+      <br />
+      How to use these packages?
+      <ul>
+        <li>
+          <b>nodemon</b> type <code>nodemon app-name.js</code> in the CLI. Nodemon will start the program and restart it when changes are detected.
+          You can also specify which files to "listen" for.
+        </li>
+        <li>
+          <b>express</b> to start working with express, you need to create app.js file, import express, start the server and specify the port. The
+          code for those actions is below. You can find more about working with express in the "REST" and "SSR" pages.
+        </li>
+        <div>
+          <pre class="syntax">
+                const express = require("express");
+                const app = express();
+                app.listen(3000, () => {
+                    console.log("server is running on", 3000);
+                });
+            </pre
+          >
+        </div>
+        <li><b>supervisor</b> same as the nodemon, but use <code>supervisor</code> keyword instead of <code>nodemon</code></li>
+      </ul>
+    </div>
+  </div>
+</div>

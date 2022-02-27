@@ -9,3 +9,4 @@ app.js - file where we start a server
 Gitignore - don't push node_modules
 You can import using import, or require
 app.listen(portNo) should be at the bottom
+path variable: always string, if we use id we need to  convert it, query string

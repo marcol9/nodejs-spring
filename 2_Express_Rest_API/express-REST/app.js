@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-app.use(express.json());
+app.use(express.json()); //we say that our api will recieve json objects
 
 let movies = [
   { id: 1, name: "Shutter island" },
@@ -8,6 +8,7 @@ let movies = [
   { id: 3, name: "Spider-man" },
   { id: 4, name: "Matrix" },
 ];
+CURRENT_ID = 4;
 
 function getMaxMovieId(movies) {
   let max = 0;
@@ -51,20 +52,43 @@ app.get("/:movieId", (req, res) => {
 
 app.post("/", (req, res) => {
   // If we create new movie, the program creates movie with max id that exists + 1
+  const movieToCreate = req.body;
+  movieToCreate.id = ++CURRENT_ID;
+  movies.push(movieToCreate);
+  res.send({ data: movieToCreate });
 
-  const newMovie = {
+  /*const newMovie = {
     id: getMaxMovieId(movies) + 1,
     name: req.body.name,
   };
   res.send(newMovie);
   movies.push(newMovie);
+  */
 });
 
 app.put("/:movieId", (req, res) => {
+  const foundMovie = movies.find((movie) => movie.id === Number(req.params.movieId));
+  foundMovie.name = req.body.name;
+  res.send(foundMovie);
+
+  /*
   const movieId = req.params.movieId;
   const movie = findMovieByMovieId(movies, movieId);
   movie.name = req.body.name;
   res.send(movie);
+  */
+});
+
+app.patch("/:movieId", (req, res) => {
+  const foundMovieIndex = movies.findIndex((movie) => movie.id === Number(req.params.movieId));
+  if (foundMovieIndex != -1) {
+    const foundMovie = movies[foundMovieIndex];
+    const movieToUpdateWith = { ...foundMovie, ...req.body, id: foundMovie.id };
+    movies[foundMovieId] = movieToUpdateWith;
+    res.send({ data: movieToUpdateWith });
+  } else {
+    res.status(404).send({});
+  }
 });
 
 app.delete("/:movieId", (req, res) => {
