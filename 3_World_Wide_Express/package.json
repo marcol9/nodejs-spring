@@ -1,7 +1,15 @@
 {
+  "scripts": {
+    "start-dev": "cross-env PORT=3000 supervisor app.js",
+    "start": "node app.js"
+  },
   "dependencies": {
     "express": "^4.17.3",
+    "node-fetch": "^2.0.0",
     "nodemon": "^2.0.15",
     "supervisor": "^0.12.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
