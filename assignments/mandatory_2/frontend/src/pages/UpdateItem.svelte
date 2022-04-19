@@ -64,8 +64,8 @@
   });
   console.log(item);
   function updateItem(item) {
-    fetch(apiurl + "/signup", {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+    fetch(apiurl + "/item/" + id, {
+      method: "PUT", // *GET, POST, PUT, DELETE, etc.
       credentials: "include", // include, *same-origin, omit
       headers: {
         "Content-Type": "application/json",
@@ -74,10 +74,10 @@
     }).then((response) => {
       const status = response.status;
       switch (status) {
-        case 201:
-          toastr["success"]("Registered succesfully");
+        case 200:
+          toastr["success"]("Updated succesfully");
           setTimeout(() => {
-            window.location.href = "/login";
+            window.location.href = "/admin/view-items";
           }, 1500);
           break;
         case 429:

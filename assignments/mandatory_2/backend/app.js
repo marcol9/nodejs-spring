@@ -55,11 +55,6 @@ app.get("/orders", authenticateUser, checkIfAdmin, (req, res) => {
   res.json(orders);
 });
 
-app.post("/items", authenticateUser, checkIfAdmin, (req, res) => {
-  const newItem = req.body;
-  items.push(newItem);
-  res.json(newItem);
-});
 app.post("/orders", authenticateUser, (req, res) => {
   const newOrder = req.body;
   if (items.includes((item) => item.id === newOrder.itemId)) {

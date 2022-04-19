@@ -38,6 +38,9 @@
       switch (status) {
         case 200:
           toastr["success"]("Item added succesfully");
+          setTimeout(() => {
+            window.location.reload();
+          }, 300);
           break;
         case 429:
           toastr["warning"]("Too many attempts, try again later");

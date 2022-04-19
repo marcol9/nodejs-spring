@@ -9,6 +9,7 @@
   import AddItem from "../pages/AddItem.svelte";
   import ViewItems from "../pages/ViewItems.svelte";
   import UpdateItem from "../pages/UpdateItem.svelte";
+  import ViewItemsCategory from "../pages/ViewItemsCategory.svelte";
 
   export let role;
   export let username;
@@ -65,16 +66,28 @@
               </li>
             {:else}
               <li class="nav-item text-link">
-                <a class="nav-link" href="/items">items</a>
+                <Link to="/view-items-category?category=pcs-and-laptops">
+                  <a class="nav-link" href="/view-items-category">PC's and Laptops</a>
+                </Link>
               </li>
               <li class="nav-item  text-link">
-                <a class="nav-link" href="/rest">REST api</a>
+                <a class="nav-link" href="/rest">Phones</a>
               </li>
               <li class="nav-item  text-link">
-                <a class="nav-link" href="/ssr">SSR</a>
+                <a class="nav-link" href="/ssr">Tablets</a>
+              </li>
+              <li class="nav-item  text-link">
+                <a class="nav-link" href="/ssr">Accessories</a>
               </li>
             {/if}
           </ul>
+          <button class="nav-link cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+              />
+            </svg>
+          </button>
           {#if auth == true}
             <p class="nav-link">Hi, {username}</p>
             <button
@@ -99,6 +112,7 @@
   <Route path="/reset-password" component={ResetPassword} />
   <Route path="/admin/view-items" component={ViewItems} />
   <Route path="/admin/update-item/*" component={UpdateItem} />
+  <Route path="/view-items-category" component={ViewItemsCategory} />
 </Router>
 
 <style>
@@ -127,5 +141,11 @@
   button,
   .nav-link {
     margin-bottom: 0px;
+  }
+  .cart {
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
   }
 </style>

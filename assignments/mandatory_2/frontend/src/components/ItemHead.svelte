@@ -13,5 +13,7 @@
     {#each keys as key}
       <th>{key}</th>
     {/each}
+    <th>Update</th>
+    <th>Delete</th>
   </tr>
 </thead>
