@@ -1,7 +1,7 @@
 <script>
   import { Router, Link, Route } from "svelte-navigator";
   import Login from "../pages/Login.svelte";
-  import { loggedin } from "../store/loggedin";
+  import { loggedin, cart } from "../store/loggedin";
   import { apiurl, weburl } from "../store/apiurl.js";
   import Register from "../pages/Register.svelte";
   import ResetPassEmail from "../pages/ResetPassEmail.svelte";
@@ -9,7 +9,11 @@
   import AddItem from "../pages/AddItem.svelte";
   import ViewItems from "../pages/ViewItems.svelte";
   import UpdateItem from "../pages/UpdateItem.svelte";
-  import ViewItemsCategory from "../pages/ViewItemsCategory.svelte";
+  import PcsAndLaptops from "../pages/PcsAndLaptops.svelte";
+  import Accessories from "../pages/Accessories.svelte";
+  import Phones from "../pages/Phones.svelte";
+  import Tablets from "../pages/Tablets.svelte";
+  import Cart from "../pages/Cart.svelte";
 
   export let role;
   export let username;
@@ -66,28 +70,37 @@
               </li>
             {:else}
               <li class="nav-item text-link">
-                <Link to="/view-items-category?category=pcs-and-laptops">
+                <Link to="/view-items-category/pcs-and-laptops">
                   <a class="nav-link" href="/view-items-category">PC's and Laptops</a>
                 </Link>
               </li>
               <li class="nav-item  text-link">
-                <a class="nav-link" href="/rest">Phones</a>
+                <Link to="/view-items-category/phones">
+                  <a class="nav-link" href="/view-items-category">Phones</a>
+                </Link>
               </li>
               <li class="nav-item  text-link">
-                <a class="nav-link" href="/ssr">Tablets</a>
+                <Link to="/view-items-category/tablets">
+                  <a class="nav-link" href="/view-items-category">Tablets</a>
+                </Link>
               </li>
               <li class="nav-item  text-link">
-                <a class="nav-link" href="/ssr">Accessories</a>
+                <Link to="/view-items-category/accessories">
+                  <a class="nav-link" href="/view-items-category">Accessories</a>
+                </Link>
               </li>
             {/if}
           </ul>
-          <button class="nav-link cart">
-            <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-              <path
-                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-              />
-            </svg>
-          </button>
+          <Link to="/cart">
+            <button class="nav-link cart">
+              <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                <path
+                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                />
+              </svg>
+              {$cart.length}
+            </button>
+          </Link>
           {#if auth == true}
             <p class="nav-link">Hi, {username}</p>
             <button
@@ -112,7 +125,11 @@
   <Route path="/reset-password" component={ResetPassword} />
   <Route path="/admin/view-items" component={ViewItems} />
   <Route path="/admin/update-item/*" component={UpdateItem} />
-  <Route path="/view-items-category" component={ViewItemsCategory} />
+  <Route path="/view-items-category/pcs-and-laptops" component={PcsAndLaptops} />
+  <Route path="/view-items-category/accessories" component={Accessories} />
+  <Route path="/view-items-category/phones" component={Phones} />
+  <Route path="/view-items-category/tablets" component={Tablets} />
+  <Route path="/cart" component={Cart} />
 </Router>
 
 <style>

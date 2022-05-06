@@ -13,11 +13,13 @@ router.get("/items", async (req, res) => {
 });
 router.get("/items-by-category", async (req, res) => {
   const category = req.query.category;
+  console.log(category)
   try {
-    const items = await db.all("SELECT id,name,price,category,description,inStock FROM items WHERE category =?", [category]);
+    const items = await db.all("SELECT id,name,price,category,description,inStock,picture FROM items WHERE category =?", [category]);
     res.send({ data: items });
-  } catch {
+  } catch (e) {
     res.status(500).send();
+    console.log(e)
   }
 });
 
