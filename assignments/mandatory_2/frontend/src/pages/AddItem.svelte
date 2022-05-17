@@ -18,6 +18,11 @@
     hideMethod: "fadeOut",
   };
   import { apiurl, weburl } from "../store/apiurl.js";
+  import { Route } from "svelte-navigator";
+  import PrivateRouteGuard from "../components/PrivateRouteGuard.svelte";
+
+  export let path;
+
   let data = {
     name: "",
     price: "",
@@ -51,6 +56,12 @@
     });
   }
 </script>
+
+<Route {path} let:params let:location let:navigate>
+  <PrivateRouteGuard>
+    <slot {params} {location} {navigate} />
+  </PrivateRouteGuard>
+</Route>
 
 <main class="form-signin">
   <form>

@@ -19,6 +19,11 @@
   };
   import { apiurl, weburl } from "../store/apiurl.js";
   import { onMount } from "svelte";
+  import { Route } from "svelte-navigator";
+  import PrivateRouteGuard from "../components/PrivateRouteGuard.svelte";
+
+  export let role;
+
   let item = {
     id: "",
     name: "",
@@ -62,7 +67,6 @@
         item.inStock = resJson.data.inStock;
       });
   });
-  console.log(item);
   function updateItem(item) {
     fetch(apiurl + "/item/" + id, {
       method: "PUT", // *GET, POST, PUT, DELETE, etc.
@@ -90,6 +94,7 @@
   }
 </script>
 
+<PrivateRouteGuard />
 <main class="form-signin">
   <form>
     <img class="mb-4" src="logo.png" alt="" width="60" height="66" />

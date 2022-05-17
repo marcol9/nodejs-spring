@@ -21,6 +21,9 @@
   import { onMount } from "svelte";
   import ItemRow from "../components/ItemRow.svelte";
   import ItemHead from "../components/ItemHead.svelte";
+  import { Route } from "svelte-navigator";
+  import PrivateRouteGuard from "../components/PrivateRouteGuard.svelte";
+
   let items = [];
 
   onMount(() => {
@@ -49,6 +52,8 @@
       });
   });
 </script>
+
+<PrivateRouteGuard />
 
 <table>
   <ItemHead />

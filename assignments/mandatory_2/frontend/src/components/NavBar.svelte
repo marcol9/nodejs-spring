@@ -124,7 +124,9 @@
   <Route path="/resetpassemail" component={ResetPassEmail} />
   <Route path="/reset-password" component={ResetPassword} />
   <Route path="/admin/view-items" component={ViewItems} />
-  <Route path="/admin/update-item/*" component={UpdateItem} />
+  <Route path="/admin/update-item/*">
+    <UpdateItem {role} />
+  </Route>
   <Route path="/view-items-category/pcs-and-laptops" component={PcsAndLaptops} />
   <Route path="/view-items-category/accessories" component={Accessories} />
   <Route path="/view-items-category/phones" component={Phones} />
